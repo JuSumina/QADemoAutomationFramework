@@ -35,39 +35,52 @@ Before running this automation framework, ensure you have:
 
 
 ## 🏗️ Framework Architecture
-src/  
-├── main/java/  
-│   ├── constants/          # Test constants and enums  
-│   │   ├── GlobalConstants.java  
-│   │   ├── TestDataConstants.java  
-│   │   ├── TimeConstants.java  
-│   │   └── URLConstants.java  
-│   ├── context/           # Test context management  
-│   │   ├── TestContext.java  
-│   │   └── ScenarioContext.java  
-│   ├── pages/             # Page Object Model classes  
-│   │   └── LoginPage.java  
-│   └── utils/             # Utility classes  
-│       ├── ConfigReader.java  
-│       ├── DriverFactory.java  
-│       ├── ElementUtils.java  
-│       ├── WaitUtils.java  
-│       ├── TestLogger.java  
-│       ├── CSVUtils.java  
-│       └── ExcelUtils.java  
-└── test/  
-    ├── java/  
-    │   ├── runners/       # Cucumber test runners  
-    │   │   └── TestRunner.java  
-    │   ├── stepDefinitions/ # Cucumber step definitions  
-    │   │   └── LoginSteps.java  
-    │   └── hooks/         # Test lifecycle hooks  
-    │       └── Hooks.java  
-    └── resources/  
-        ├── features/      # Cucumber feature files  
-        │   └── login.feature  
-        └── config/        # Configuration files  
-            └── config.properties  
+
+Fix Tree Structure Display in README
+Document 
+Perfect! The key is to wrap your tree structure in triple backticks (```) to create a code block.
+
+🔧 Quick Fix:
+Replace your Framework Architecture section with this:
+
+markdown
+## 🏗️ Framework Architecture
+
+```
+src/
+├── main/java/
+│   ├── constants/          # Test constants and enums
+│   │   ├── GlobalConstants.java
+│   │   ├── TestDataConstants.java
+│   │   ├── TimeConstants.java
+│   │   └── URLConstants.java
+│   ├── context/           # Test context management
+│   │   ├── TestContext.java
+│   │   └── ScenarioContext.java
+│   ├── pages/             # Page Object Model classes
+│   │   └── LoginPage.java
+│   └── utils/             # Utility classes
+│       ├── ConfigReader.java
+│       ├── DriverFactory.java
+│       ├── ElementUtils.java
+│       ├── WaitUtils.java
+│       ├── TestLogger.java
+│       ├── CSVUtils.java
+│       └── ExcelUtils.java
+└── test/
+    ├── java/
+    │   ├── runners/       # Cucumber test runners
+    │   │   └── TestRunner.java
+    │   ├── stepDefinitions/ # Cucumber step definitions
+    │   │   └── LoginSteps.java
+    │   └── hooks/         # Test lifecycle hooks
+    │       └── Hooks.java
+    └── resources/
+        ├── features/      # Cucumber feature files
+        │   └── login.feature
+        └── config/        # Configuration files
+            └── config.properties
+```
 
 
 ## 🔧 Key Features
