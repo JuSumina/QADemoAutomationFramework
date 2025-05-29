@@ -30,6 +30,9 @@ public class LoginPage {
     @FindBy(id="user-login")
     public WebElement userLoginBtn;
 
+    @FindBy(id="user-login-message")
+    public WebElement userLoginErrorMessage;
+
 
     // ========== LOGIN METHODS ========== //
     public boolean isLoginPageDisplayed() {
@@ -64,6 +67,12 @@ public class LoginPage {
         String userLoginHeaderText = ElementUtils.getText(userLoginHeader);
         TestLogger.debug("Login header text: {}", userLoginHeaderText);
         return userLoginHeaderText;
+    }
+
+    public String getUserLoginErrorMessage() {
+        String userLoginErrorText = ElementUtils.getText(userLoginErrorMessage);
+        TestLogger.debug("Login header text: {}", userLoginErrorText);
+        return userLoginErrorText;
     }
 
     public boolean isUserUsernameFieldEnabled() {

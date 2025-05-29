@@ -18,6 +18,9 @@ public class LoginSteps{
         this.testContext = testContext;
     }
 
+
+    // ========== VALID LOGIN ========== //
+
     @Given("user is on the login page")
     public void user_is_on_the_login_page() {
 
@@ -72,6 +75,48 @@ public class LoginSteps{
         TestLogger.stepInfo("Successfully redirected to User Dashboard");
     }
 
+    // ========== INVALID LOGIN ========== //
 
+    @When("user enters invalid email and invalid password under User Login")
+    public void user_enters_invalid_email_and_invalid_password_under_User_Login() {
+
+        String userHeaderText = testContext.getLoginPage().getUserLoginHeaderText();
+        assertEquals("User Login", userHeaderText);
+
+        String invalidUsername = ConfigReader.getProperty("invalid.username");
+        String invalidPassword = ConfigReader.getProperty("invalid.password");
+
+        testContext.getLoginPage().enterUsername(invalidUsername);
+        testContext.getLoginPage().enterPassword(invalidPassword);
+
+        TestLogger.stepInfo("Invalid credentials entered for user: " + invalidUsername);
+    }
+
+    @Then("user sees an error message")
+    public void user_sees_an_error_message(){
+
+        String userLoginErrorText = testContext.getLoginPage().getUserLoginErrorMessage();
+        assertEquals("Login failed. Your email or password is incorrect.", userLoginErrorText);
+
+        TestLogger.stepInfo("Login Error Message for user: " + userLoginErrorText);
+    }
+
+    @And("user remains on the login page")
+    public void user_remains_on_the_login_page() {
+
+        boolean urlContainsIndex = WaitUtils.waitForUrlContains(testContext.driver, "index");
+
+        String currentUrl = testContext.driver.getCurrentUrl();
+        TestLogger.stepInfo("Current URL: " + currentUrl);
+
+        assertTrue(urlContainsIndex,
+                "User should stay on Login page. Current URL: " + currentUrl);
+
+        boolean isLoginPageDisplayed = testContext.getLoginPage().isLoginPageDisplayed();
+        assertTrue(isLoginPageDisplayed, "Login page should still be displayed after failed login");
+
+        TestLogger.stepInfo("User remained on login page after invalid login attempt");
+        TestLogger.assertion("User remains on login page after failed login", true);
+    }
 
 }

@@ -243,7 +243,7 @@ public class ElementUtils {
 
 
 
-    // ========== UTILITY METHODS ==========
+    // ========== UTILITY METHODS ========== //
 
 
     public static String getText(WebElement element) {
