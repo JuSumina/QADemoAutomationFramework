@@ -3,7 +3,7 @@ pipeline {
     
     tools {
         maven 'Maven-3.9.0'  // This name will be configured in Jenkins
-        jdk 'JDK-19'         // This name will be configured in Jenkins
+        jdk 'JDK-21'         // This name will be configured in Jenkins
     }
     
     environment {
