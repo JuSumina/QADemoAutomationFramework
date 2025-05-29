@@ -1,4 +1,4 @@
-# QA Demo Automation Framework
+# QADemo Automation Framework
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Java](https://img.shields.io/badge/Java-19-orange)
