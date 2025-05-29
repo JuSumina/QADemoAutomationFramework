@@ -1,0 +1,40 @@
+# Compiled class files
+*.class
+target/
+
+# Log files
+*.log
+logs/
+
+# Test reports
+test-output/
+cucumber-reports/
+extent-reports/
+allure-results/
+screenshots/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.settings/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Selenium
+chromedriver
+geckodriver
+edgedriver
+
+# Config files with sensitive data (optional)
+config.properties
