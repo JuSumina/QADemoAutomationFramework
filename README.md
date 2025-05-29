@@ -85,7 +85,7 @@ src/
 
 📞 Contact
 
-Author: Yuliya Sumina
-Email: yuliyasumina@gmail.com
-GitHub: @JuSumina
+Author: Yuliya Sumina  
+Email: yuliyasumina@gmail.com  
+GitHub: @JuSumina  
 LinkedIn: https://www.linkedin.com/in/yuliyasumina/
