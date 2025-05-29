@@ -72,15 +72,15 @@ src/
 
 ## 🔧 Key Features
 
-✅ Page Object Model - Clean, maintainable page classes
-✅ BDD with Cucumber - Business-readable test scenarios
-✅ Multi-browser support - Chrome, Firefox, Edge, Safari
-✅ Parallel execution - Thread-safe test execution
-✅ Smart waits - Explicit waits with timeout handling
-✅ Enhanced logging - Custom TestLogger with context
-✅ Screenshot capture - Automatic screenshots on failures
-✅ Configuration management - Centralized config handling
-✅ CI/CD ready - Jenkins pipeline integration
+✅ Page Object Model - Clean, maintainable page classes  
+✅ BDD with Cucumber - Business-readable test scenarios  
+✅ Multi-browser support - Chrome, Firefox, Edge, Safari  
+✅ Parallel execution - Thread-safe test execution  
+✅ Smart waits - Explicit waits with timeout handling  
+✅ Enhanced logging - Custom TestLogger with context  
+✅ Screenshot capture - Automatic screenshots on failures  
+✅ Configuration management - Centralized config handling  
+✅ CI/CD ready - Jenkins pipeline integration  
 
 
 ## 📞 Contact
