@@ -1,4 +1,4 @@
-QA Demo Automation Framework
+# QA Demo Automation Framework
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Java](https://img.shields.io/badge/Java-19-orange)
@@ -6,12 +6,12 @@ QA Demo Automation Framework
 ![Cucumber](https://img.shields.io/badge/Cucumber-7.15.0-brightgreen)
 
 
-🚀 Overview
+## 🚀 Overview
 
 A comprehensive **Selenium WebDriver** automation framework built with **Cucumber BDD**, **Java 19**, and **Maven**. This framework provides a robust foundation for automated testing with clean architecture, detailed reporting, and CI/CD integration.
 
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
@@ -23,7 +23,7 @@ A comprehensive **Selenium WebDriver** automation framework built with **Cucumbe
 | **TestLogger** | Custom | Enhanced Logging |
 
 
-📋 Prerequisites
+## 📋 Prerequisites
 
 Before running this automation framework, ensure you have:
 
@@ -34,7 +34,7 @@ Before running this automation framework, ensure you have:
 - ☑️ **IDE** (IntelliJ IDEA/Eclipse recommended)
 
 
-🏗️ Framework Architecture
+## 🏗️ Framework Architecture
 src/
 ├── main/java/
 │   ├── constants/          # Test constants and enums
@@ -70,7 +70,7 @@ src/
             └── config.properties
 
 
-🔧 Key Features
+## 🔧 Key Features
 
 ✅ Page Object Model - Clean, maintainable page classes
 ✅ BDD with Cucumber - Business-readable test scenarios
