@@ -83,9 +83,9 @@ src/
 ✅ CI/CD ready - Jenkins pipeline integration
 
 
-📞 Contact
+## 📞 Contact
 
-Author: Yuliya Sumina  
-Email: yuliyasumina@gmail.com  
-GitHub: @JuSumina  
-LinkedIn: https://www.linkedin.com/in/yuliyasumina/
+- **Author**: Yuliya Sumina  
+- **Email**: [yuliyasumina@gmail.com]    
+- **GitHub**: [@JuSumina](https://github.com/JuSumina)  
+- **LinkedIn**: [Your LinkedIn](https://www.linkedin.com/in/yuliyasumina/)  
