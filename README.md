@@ -102,3 +102,4 @@ src/
 - **Email**: yuliyasumina@gmail.com  
 - **GitHub**: [@JuSumina](https://github.com/JuSumina)  
 - **LinkedIn**: https://www.linkedin.com/in/yuliyasumina/   
+
