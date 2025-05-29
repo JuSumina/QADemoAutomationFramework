@@ -35,39 +35,39 @@ Before running this automation framework, ensure you have:
 
 
 ## 🏗️ Framework Architecture
-src/
-├── main/java/
-│   ├── constants/          # Test constants and enums
-│   │   ├── GlobalConstants.java
-│   │   ├── TestDataConstants.java
-│   │   ├── TimeConstants.java
-│   │   └── URLConstants.java
-│   ├── context/           # Test context management
-│   │   ├── TestContext.java
-│   │   └── ScenarioContext.java
-│   ├── pages/             # Page Object Model classes
-│   │   └── LoginPage.java
-│   └── utils/             # Utility classes
-│       ├── ConfigReader.java
-│       ├── DriverFactory.java
-│       ├── ElementUtils.java
-│       ├── WaitUtils.java
-│       ├── TestLogger.java
-│       ├── CSVUtils.java
-│       └── ExcelUtils.java
-└── test/
-    ├── java/
-    │   ├── runners/       # Cucumber test runners
-    │   │   └── TestRunner.java
-    │   ├── stepDefinitions/ # Cucumber step definitions
-    │   │   └── LoginSteps.java
-    │   └── hooks/         # Test lifecycle hooks
-    │       └── Hooks.java
-    └── resources/
-        ├── features/      # Cucumber feature files
-        │   └── login.feature
-        └── config/        # Configuration files
-            └── config.properties
+src/  
+├── main/java/  
+│   ├── constants/          # Test constants and enums  
+│   │   ├── GlobalConstants.java  
+│   │   ├── TestDataConstants.java  
+│   │   ├── TimeConstants.java  
+│   │   └── URLConstants.java  
+│   ├── context/           # Test context management  
+│   │   ├── TestContext.java  
+│   │   └── ScenarioContext.java  
+│   ├── pages/             # Page Object Model classes  
+│   │   └── LoginPage.java  
+│   └── utils/             # Utility classes  
+│       ├── ConfigReader.java  
+│       ├── DriverFactory.java  
+│       ├── ElementUtils.java  
+│       ├── WaitUtils.java  
+│       ├── TestLogger.java  
+│       ├── CSVUtils.java  
+│       └── ExcelUtils.java  
+└── test/  
+    ├── java/  
+    │   ├── runners/       # Cucumber test runners  
+    │   │   └── TestRunner.java  
+    │   ├── stepDefinitions/ # Cucumber step definitions  
+    │   │   └── LoginSteps.java  
+    │   └── hooks/         # Test lifecycle hooks  
+    │       └── Hooks.java  
+    └── resources/  
+        ├── features/      # Cucumber feature files  
+        │   └── login.feature  
+        └── config/        # Configuration files  
+            └── config.properties  
 
 
 ## 🔧 Key Features
@@ -85,7 +85,7 @@ src/
 
 ## 📞 Contact
 
-- **Author**: Yuliya Sumina<br>
-- **Email**: yuliyasumina@gmail.com<br>
-- **GitHub**: [@JuSumina](https://github.com/JuSumina)<br>
-- **LinkedIn**: (https://www.linkedin.com/in/yuliyasumina/)<br>
+- **Author**: Yuliya Sumina  
+- **Email**: yuliyasumina@gmail.com  
+- **GitHub**: [@JuSumina](https://github.com/JuSumina)  
+- **LinkedIn**: https://www.linkedin.com/in/yuliyasumina/   
