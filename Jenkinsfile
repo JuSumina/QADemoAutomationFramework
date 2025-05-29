@@ -8,7 +8,6 @@ pipeline {
     
     environment {
         // Environment variables for the pipeline
-        MAVEN_OPTS = '-Xmx1024m -XX:MaxPermSize=512m'
         BROWSER = 'chrome'
         HEADLESS = 'true'
         PROJECT_NAME = 'QA Demo Automation Framework'
