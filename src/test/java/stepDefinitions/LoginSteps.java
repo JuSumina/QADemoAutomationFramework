@@ -1,0 +1,77 @@
+package stepDefinitions;
+
+import context.TestContext;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.And;
+import utils.TestLogger;
+import utils.ConfigReader;
+import utils.WaitUtils;
+
+import static org.junit.jupiter.api.Assertions.*;
+public class LoginSteps{
+
+    private TestContext testContext;
+
+    public LoginSteps(TestContext testContext) {
+        this.testContext = testContext;
+    }
+
+    @Given("user is on the login page")
+    public void user_is_on_the_login_page() {
+
+        TestLogger.stepInfo("Browser opened and application launched");
+        boolean isLoginPageDisplayed = testContext.getLoginPage().isLoginPageDisplayed();
+        TestLogger.assertion("Login page is displayed after launching application", isLoginPageDisplayed);
+        assertTrue(isLoginPageDisplayed, "Login page should be displayed after launching application");
+    }
+
+    @When("user enters valid email and valid password under User Login")
+    public void user_enters_valid_email_and_valid_password_under_User_Login() {
+
+        String userHeaderText = testContext.getLoginPage().getUserLoginHeaderText();
+        assertEquals("User Login", userHeaderText);
+
+        String username = ConfigReader.getProperty("username");
+        String password = ConfigReader.getProperty("password");
+
+        testContext.getLoginPage().enterUsername(username);
+        testContext.getLoginPage().enterPassword(password);
+
+        TestLogger.stepInfo("Valid credentials entered for user: " + username);
+    }
+
+    @And("clicks on login button")
+    public void clicks_on_login_button() {
+        testContext.getLoginPage().clickOnLoginBtn();
+        TestLogger.stepInfo("Login button clicked");
+    }
+
+    @Then("user is logged in successfully")
+    public void user_is_logged_in_successfully() {
+
+        boolean urlContainsDashboard = WaitUtils.waitForUrlContains(testContext.driver, "dashboard");
+
+        String currentUrl = testContext.driver.getCurrentUrl();
+        TestLogger.stepInfo("Current URL after login: " + currentUrl);
+
+        assertTrue(urlContainsDashboard,
+                "User should be redirected to dashboard page. Current URL: " + currentUrl);
+
+        TestLogger.assertion("User logged in successfully", urlContainsDashboard);
+
+    }
+
+    @And("gets redirected to User Dashboard")
+    public void user_gets_redirected_to_User_Dashboard() {
+
+        String userDashboardHeaderText = testContext.getUserDashboardPage().getUserDashboardHeaderText();
+        assertEquals("User Dashboard", userDashboardHeaderText);
+
+        TestLogger.stepInfo("Successfully redirected to User Dashboard");
+    }
+
+
+
+}
