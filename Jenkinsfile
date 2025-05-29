@@ -244,7 +244,7 @@ pipeline {
                                 <p style='color: green;'><strong>✅ All tests executed successfully!</strong></p>
                             </div>
                         """,
-                        to: 'your-email@company.com',
+                        to: 'yuliyasumina@gmail.com',
                         mimeType: 'text/html'
                     )
                 } catch (Exception e) {
@@ -285,7 +285,7 @@ pipeline {
                                 <p style='color: red;'><strong>⚠️ Please check the console logs and fix any issues.</strong></p>
                             </div>
                         """,
-                        to: 'your-email@company.com',
+                        to: 'yuliyasumina@gmail.com',
                         mimeType: 'text/html'
                     )
                 } catch (Exception e) {
