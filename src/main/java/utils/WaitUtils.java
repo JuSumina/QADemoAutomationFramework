@@ -41,6 +41,16 @@ public class WaitUtils {
         return getWebDriverWait(driver).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public static boolean waitForInvisibility(WebDriver driver, WebElement element) {
+        logger.debug("Waiting for element to become invisible: {}", element);
+        return getWebDriverWait(driver).until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    public static boolean waitForInvisibility(WebDriver driver, By locator) {
+        logger.debug("Waiting for element to become invisible using locator: {}", locator);
+        return getWebDriverWait(driver).until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
 
     public static WebElement waitForClickability(WebDriver driver, WebElement element) {
         logger.debug("Waiting for element clickability: {}", element);
@@ -90,7 +100,7 @@ public class WaitUtils {
     }
 
 
-    // --- Utility for Thread.sleep (Use ONLY when absolutely necessary, e.g., for visual pause/debug) ---
+    // Utility for Thread.sleep
     public static void staticWait(long milliseconds) {
         try {
             logger.warn("Performing a static wait for {} ms. Consider using explicit waits instead.", milliseconds);

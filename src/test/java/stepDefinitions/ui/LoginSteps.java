@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import context.TestContext;
 import io.cucumber.java.en.Given;
@@ -25,9 +25,9 @@ public class LoginSteps{
     public void user_is_on_the_login_page() {
 
         TestLogger.stepInfo("Browser opened and application launched");
-        boolean isLoginPageDisplayed = testContext.getLoginPage().isLoginPageDisplayed();
-        TestLogger.assertion("Login page is displayed after launching application", isLoginPageDisplayed);
-        assertTrue(isLoginPageDisplayed, "Login page should be displayed after launching application");
+        boolean isLoginPageDisplayed = testContext.getLoginPage().isLoginPageHeaderDisplayed();
+        TestLogger.assertion("Login page header is displayed after launching application", isLoginPageDisplayed);
+        assertTrue(isLoginPageDisplayed, "Login page header should be displayed after launching application");
     }
 
     @When("user enters valid email and valid password under User Login")
@@ -112,7 +112,7 @@ public class LoginSteps{
         assertTrue(urlContainsIndex,
                 "User should stay on Login page. Current URL: " + currentUrl);
 
-        boolean isLoginPageDisplayed = testContext.getLoginPage().isLoginPageDisplayed();
+        boolean isLoginPageDisplayed = testContext.getLoginPage().isLoginPageHeaderDisplayed();
         assertTrue(isLoginPageDisplayed, "Login page should still be displayed after failed login");
 
         TestLogger.stepInfo("User remained on login page after invalid login attempt");

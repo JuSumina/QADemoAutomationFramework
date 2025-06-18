@@ -19,6 +19,9 @@ public class LoginPage {
         PageFactory.initElements(this.driver, this);
     }
 
+    @FindBy(xpath="//body/h1")
+    public WebElement pageHeader;
+
     @FindBy(xpath="//form[@id='user-form']/preceding-sibling::h2")
     public WebElement userLoginHeader;
     @FindBy(id="user-email")
@@ -33,11 +36,17 @@ public class LoginPage {
     @FindBy(id="user-login-message")
     public WebElement userLoginErrorMessage;
 
+    @FindBy(xpath="//a[text()='Create Account']")
+    public WebElement createAccountLink;
+
+    @FindBy(xpath="//a[text()='Forgot your password?']")
+    public WebElement forgotPasswordLink;
+
 
     // ========== LOGIN METHODS ========== //
-    public boolean isLoginPageDisplayed() {
-        boolean isDisplayed = ElementUtils.isDisplayed(userLoginHeader);
-        TestLogger.assertion("Login page is displayed", isDisplayed);
+    public boolean isLoginPageHeaderDisplayed() {
+        boolean isDisplayed = ElementUtils.isDisplayed(pageHeader);
+        TestLogger.assertion("Login page header is displayed", isDisplayed);
         return isDisplayed;
     }
 
@@ -53,8 +62,18 @@ public class LoginPage {
     }
 
     public void clickOnLoginBtn() {
-        TestLogger.actionInfo("Click", "Login Button");
+        TestLogger.actionInfo("Click", "Login button");
         ElementUtils.click(userLoginBtn);
+    }
+
+    public void clickOnCreateAccountLink() {
+        TestLogger.actionInfo("Click", "Create Account link");
+        ElementUtils.click(createAccountLink);
+    }
+
+    public void clickOnForgotPasswordLink() {
+        TestLogger.actionInfo("Click", "Forgot Password link");
+        ElementUtils.click(forgotPasswordLink);
     }
 
     public boolean isUserLoginHeaderDisplayed() {

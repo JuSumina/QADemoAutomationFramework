@@ -1,6 +1,7 @@
 package context;
 
 import org.openqa.selenium.WebDriver;
+import pages.CreateAccountPage;
 import pages.LoginPage;
 import pages.UserDashboardPage;
 import utils.DriverFactory;
@@ -13,6 +14,8 @@ public class TestContext {
 
     private LoginPage loginPage;
     private UserDashboardPage userDashboardPage;
+    private CreateAccountPage createAccountPage;
+
 
     public TestContext() {
         this.scenarioContext = new ScenarioContext();
@@ -26,6 +29,7 @@ public class TestContext {
 
         this.loginPage = new LoginPage(driver);
         this.userDashboardPage = new UserDashboardPage(driver);
+        this.createAccountPage = new CreateAccountPage(driver);
 
         long duration = System.currentTimeMillis() - startTime;
         TestLogger.performanceLog("All pages initialization", duration);
@@ -48,6 +52,15 @@ public class TestContext {
             TestLogger.debug("Lazy initialized UserDashboardPage");
         }
         return userDashboardPage;
+    }
+
+    public CreateAccountPage getCreateAccountPage() {
+        if (createAccountPage == null) {
+            validateDriver();
+            createAccountPage = new CreateAccountPage(driver);
+            TestLogger.debug("Lazy initialized LoginPage");
+        }
+        return createAccountPage;
     }
 
 
