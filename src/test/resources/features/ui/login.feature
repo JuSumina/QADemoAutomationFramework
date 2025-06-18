@@ -1,6 +1,6 @@
 Feature: Login Functionality
 
-@smoke @loginpositive
+@smoke @login
   Scenario: Valid User Login - Both Credentials Valid
     Given user is on the login page
     When user enters valid email and valid password under User Login
@@ -8,7 +8,7 @@ Feature: Login Functionality
     Then user is logged in successfully
     And gets redirected to User Dashboard
 
-  @smoke @loginnegative
+  @smoke @login
   Scenario: Invalid User Login - Both Credentials Invalid
     When user enters invalid email and invalid password under User Login
     And clicks on login button

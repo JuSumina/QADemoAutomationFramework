@@ -17,22 +17,22 @@ pipeline {
         choice(
             name: 'BROWSER_TYPE',
             choices: ['chrome', 'firefox', 'edge'],
-            description: 'Select browser for test execution'
+            description: ''
         )
         choice(
             name: 'TAG_NAME', 
-            choices: ['smoke', 'loginregression', 'all'],
-            description: 'Select test tags to execute'
+            choices: ['smoke', 'login', 'create account', 'all'],
+            description: ''
         )
         booleanParam(
             name: 'HEADLESS_MODE',
             defaultValue: true,
-            description: 'Run tests in headless mode (recommended for CI/CD)'
+            description: ''
         )
         string(
             name: 'TEST_URL',
             defaultValue: '',
-            description: 'Override application URL (leave empty to use config default)'
+            description: ''
         )
     }
     

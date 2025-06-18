@@ -1,21 +1,21 @@
 # QADemo Automation Framework
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Java](https://img.shields.io/badge/Java-19-orange)
+![Java](https://img.shields.io/badge/Java-21-orange)
 ![Selenium](https://img.shields.io/badge/Selenium-4.15.0-green)
 ![Cucumber](https://img.shields.io/badge/Cucumber-7.15.0-brightgreen)
 
 
 ## 🚀 Overview
 
-A comprehensive **Selenium WebDriver** automation framework built with **Cucumber BDD**, **Java 19**, and **Maven**. This framework provides a robust foundation for automated testing with clean architecture, detailed reporting, and CI/CD integration.
+A comprehensive **Selenium WebDriver** automation framework built with **Cucumber BDD**, **Java 21**, and **Maven**. This framework provides a robust foundation for automated testing with clean architecture, detailed reporting, and CI/CD integration.
 
 
 ## 🛠️ Tech Stack
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| **Java** | 19 | Programming Language |
+| **Java** | 21 | Programming Language |
 | **Selenium WebDriver** | 4.31.0 | Browser Automation |
 | **Cucumber** | 7.22.0 | BDD Framework |
 | **JUnit 5** | 5.12.2 | Test Framework |
