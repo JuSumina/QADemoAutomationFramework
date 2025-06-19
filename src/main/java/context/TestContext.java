@@ -6,11 +6,13 @@ import pages.LoginPage;
 import pages.UserDashboardPage;
 import utils.DriverFactory;
 import utils.TestLogger;
+import utils.ConfigReader;
 
 public class TestContext {
 
     public WebDriver driver;
     public ScenarioContext scenarioContext;
+    private final String apiBaseUri = ConfigReader.getProperty("baseURI");
 
     private LoginPage loginPage;
     private UserDashboardPage userDashboardPage;
@@ -68,5 +70,9 @@ public class TestContext {
         if (driver == null) {
             throw new RuntimeException("WebDriver must be initialized before creating page objects");
         }
+    }
+
+    public String getApiBaseUri() {
+        return apiBaseUri;
     }
 }

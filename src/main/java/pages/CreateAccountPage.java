@@ -111,6 +111,11 @@ public class CreateAccountPage {
         ElementUtils.click(popupOkBtn);
     }
 
+    public void jsClickOnPopupOkButton() {
+        TestLogger.actionInfo("Click", "Popup OK button");
+        ElementUtils.jsClick(popupOkBtn);
+    }
+
     public boolean isOkButtonEnabled() {
         boolean isEnabled = ElementUtils.isEnabled(popupOkBtn);
         TestLogger.debug("OK button enabled: {}", isEnabled);

@@ -59,14 +59,15 @@ public class CreateAccountUISteps {
     }
 
     @And ("user clicks on Create Account button")
-    public void user_clicks_on_Create_Account_button() {
+    public void user_clicks_on_Create_Account_button() throws InterruptedException {
 
         testContext.getCreateAccountPage().clickonCreateAccountBtn();
 
         TestLogger.stepInfo("Clicked on Create Account button");
 
-        WebDriver driver = DriverFactory.getDriver();
-        WaitUtils.waitForVisibility(driver, testContext.getCreateAccountPage().successPopup);
+        //Thread.sleep(2000);
+
+
 
     }
 
@@ -74,10 +75,8 @@ public class CreateAccountUISteps {
     public void Success_popup_should_appear(){
 
         WebDriver driver = DriverFactory.getDriver();
-        WaitUtils.waitForVisibility(driver, testContext.getCreateAccountPage().popupOkBtn);
 
-        boolean isPopupDisplayed = testContext.getCreateAccountPage().isSuccessPopupDisplayed();
-        assertTrue(isPopupDisplayed, "Success popup should appear after account creation");
+        WaitUtils.waitForVisibility(driver, testContext.getCreateAccountPage().successPopup);
         TestLogger.stepInfo("Success popup appeared");
 
     }
@@ -96,33 +95,11 @@ public class CreateAccountUISteps {
 
     }
 
-    @And ("user should be able to click on OK button to close the popup")
-    public void user_should_be_able_to_click_on_OK_button_to_close_the_popup() {
-
-        boolean isOkBtnEnabled = testContext.getCreateAccountPage().isOkButtonEnabled();
-        assertTrue(isOkBtnEnabled, "OK button should be enabled");
-
-        testContext.getCreateAccountPage().clickOnPopupOkButton();
-        TestLogger.stepInfo("Clicked on OK button");
-
-
-
+    @And ("user should get redirected to Login page")
+    public void user_should_get_redirected_to_login_page() {
 
         WebDriver driver = DriverFactory.getDriver();
-
-        WebElement element = driver.findElement(By.xpath("//body/h2"));
-        Actions actions = new Actions (driver);
-        actions.moveToElement(element).perform();
-
-        /*try {
-            // Move focus away from the form
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0];scrollIntoView(true), ");
-            TestLogger.debug("Removed focus from active element", createAccountHeaderText);
-        } catch (Exception e) {
-            TestLogger.debug("Could not blur active element: {}", e.getMessage());
-        }*/
-
+        WaitUtils.waitForInvisibility(driver, testContext.getCreateAccountPage().successPopup);
 
         boolean urlContainsIndex = WaitUtils.waitForUrlContains(testContext.driver, "index");
 
