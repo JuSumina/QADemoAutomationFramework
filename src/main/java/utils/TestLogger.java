@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class TestLogger {
 
@@ -25,7 +26,7 @@ public class TestLogger {
         MDC.clear();
     }
 
-    // ========== INFO LEVEL METHODS ==========
+    // ========== INFO LEVEL METHODS ========== //
 
     public static void info(String message) {
         logger.info(message);
@@ -57,7 +58,7 @@ public class TestLogger {
         logger.debug("ELEMENT: {} - {}", action, elementInfo);
     }
 
-    // ========== WARN LEVEL METHODS ==========
+    // ========== WARN LEVEL METHODS ========== //
 
     public static void warn(String message) {
         logger.warn(message);
@@ -71,7 +72,7 @@ public class TestLogger {
         logger.warn("RETRY: {} - Attempt {}/{}", action, attempt, maxAttempts);
     }
 
-    // ========== ERROR LEVEL METHODS ==========
+    // ========== ERROR LEVEL METHODS ========== //
 
     public static void error(String message) {
         logger.error(message);
@@ -93,7 +94,7 @@ public class TestLogger {
         logger.error("TEST FAILED: {} - Reason: {}", testName, reason, throwable);
     }
 
-    // ========== SPECIALIZED LOGGING METHODS ==========
+    // ========== SPECIALIZED LOGGING METHODS ========== //
 
     public static void browserAction(String action, String details) {
         logger.info("BROWSER: {} - {}", action, details);
@@ -111,6 +112,32 @@ public class TestLogger {
         }
     }
 
+
+    public static void assertion(String description, String expected, String actual) {
+        boolean result = Objects.equals(expected, actual);
+
+        if (result) {
+            logger.info("ASSERTION PASSED: {}", description);
+        } else {
+            logger.error("ASSERTION FAILED: {} - Expected: '{}', Actual: '{}'",
+                    description, expected, actual);
+        }
+    }
+
+     public static void assertion(String description, Number expected, Number actual) {
+        boolean result = Objects.equals(expected, actual);
+
+        if (result) {
+            logger.info("ASSERTION PASSED: {}", description);
+        } else {
+            logger.error("ASSERTION FAILED: {} - Expected: {}, Actual: {}",
+                    description, expected, actual);
+        }
+     }
+
+
+
+
     public static void testStart(String testName) {
         logger.info("==================== TEST STARTED: {} ====================", testName);
     }
@@ -127,7 +154,7 @@ public class TestLogger {
         logger.info("<<< SCENARIO ENDED: {} - Status: {}", scenarioName, status);
     }
 
-    // ========== CONFIGURATION AND SETUP LOGGING ==========
+    // ========== CONFIGURATION AND SETUP LOGGING ========== //
 
     public static void configInfo(String configName, String value) {
         logger.info("CONFIG: {} = {}", configName, value);
@@ -141,7 +168,7 @@ public class TestLogger {
         logger.info("ENVIRONMENT: {} - Base URL: {}", environment, baseUrl);
     }
 
-    // ========== PERFORMANCE LOGGING ==========
+    // ========== PERFORMANCE LOGGING ========== //
 
     public static void performanceLog(String action, long durationMs) {
         logger.info("PERFORMANCE: {} completed in {}ms", action, durationMs);
@@ -151,7 +178,7 @@ public class TestLogger {
         logger.warn("SLOW ACTION: {} took {}ms (threshold: {}ms)", action, durationMs, thresholdMs);
     }
 
-    // ========== UTILITY METHODS ==========
+    // ========== UTILITY METHODS ========== //
 
 
      //Log with custom prefix

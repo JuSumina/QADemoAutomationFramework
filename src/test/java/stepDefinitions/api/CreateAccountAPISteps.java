@@ -1,5 +1,7 @@
 package stepDefinitions.api;
 
+import constants.APIConstants;
+import context.ScenarioContext;
 import context.TestContext;
 import io.restassured.response.Response;
 import io.cucumber.java.en.And;
@@ -10,43 +12,49 @@ import utils.TestLogger;
 
 public class CreateAccountAPISteps {
 
+    private Response response;
     private TestContext testContext;
 
-    Response response;
+
+    private final ScenarioContext scenarioContext = ScenarioContext.getInstance();
 
     public CreateAccountAPISteps (TestContext testContext) {
         this.testContext = testContext;
     }
 
 
-    @When ("a user registers with automatically generated valid credentials")
-    public void a_user_registers_with_automatically_generated_valid_credentials(){
+    @When ("a user creates an account with automatically generated valid credentials")
+    public void a_user_creates_account_with_generated_valid_credentials(){
 
-        Response response = APIUtils.registerUserWithGeneratedCredentials(testContext.getApiBaseUri());
-        this.response = response;
+        TestLogger.stepInfo("Creating account with generated credentials");
 
-        TestLogger.stepInfo("Sent POST request to create user account");
+        response = APIUtils.registerUserWithGeneratedCredentials(testContext.getApiBaseUri());
     }
 
     @Then ("the response status code should be {int}")
-    public void verify_response_status_code_after_user_creation(Integer responseCode){
+    public void verify_response_status_code_after_user_creation(int expectedStatusCode){
 
-        response.then().statusCode(responseCode);
-
-        TestLogger.stepInfo("Response code is " + response.statusCode());
-        TestLogger.assertion("Response code should be 200", true);
-
+        APIUtils.validateStatusCode(response, expectedStatusCode);
     }
 
     @And ("the response should contain a success message")
     public void verify_success_message_after_user_creation() {
 
+        String messageRegisterSuccess = APIConstants.MESSAGE_REGISTER_SUCCESS;
 
+        APIUtils.validateResponseMessage(response, messageRegisterSuccess);
 
+        TestLogger.stepInfo("Register success message is " + messageRegisterSuccess);
     }
 
-    @And ("a userId should be present in the response body")
+    @And ("a userId key should be present in the response body")
     public void a_userId_should_be_present_in_the_response_body() {
+
+        String fieldKey = APIConstants.RESPONSE_KEY_USER_ID;
+
+        APIUtils.validateFieldKeyExists(response, fieldKey);
+
+        TestLogger.stepInfo("userId key is present in the response body");
 
     }
 }

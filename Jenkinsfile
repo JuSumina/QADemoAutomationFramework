@@ -21,7 +21,7 @@ pipeline {
         )
         choice(
             name: 'TAG_NAME', 
-            choices: ['smoke', 'login', 'create account', 'all'],
+            choices: ['smoke', 'login', 'createaccount', 'createaccountapi', 'all'],
             description: ''
         )
         booleanParam(

@@ -20,6 +20,8 @@ public class APIUtils {
             .when()
             .post(APIConstants.REGISTER_USER);
 
+        TestLogger.apiCall("POST", APIConstants.REGISTER_USER, response.getStatusCode());
+
         return response;
     }
 
@@ -39,30 +41,85 @@ public class APIUtils {
                 .when()
                 .post(APIConstants.REGISTER_USER);
 
+        TestLogger.apiCall("POST", APIConstants.REGISTER_USER, response.getStatusCode());
+
         return response;
     }
 
 
 
     public static Response loginUser(String baseUri, String email, String password) {
-        return given()
+
+        TestLogger.info("Logging in user - Email: {}", email);
+
+        Response response =  given()
+                .baseUri(baseUri)
                 .contentType(APIConstants.CONTENT_TYPE_FORM)
                 .formParam("email", email)
                 .formParam("password", password)
                 .when()
                 .post(APIConstants.LOGIN_USER);
+
+        TestLogger.apiCall("POST", APIConstants.LOGIN_USER, response.getStatusCode());
+
+        return response;
     }
 
 
 
     // ========== RESPONSE VALIDATION METHODS ========== //
 
+    public static void validateStatusCode(Response response, int expectedStatusCode) {
+        int actualStatusCode = response.getStatusCode();
+        TestLogger.assertion("Status code validation", expectedStatusCode, actualStatusCode);
+        response.then().statusCode(expectedStatusCode);
+    }
+
     public static void validateResponseMessage(Response response, String expectedMessage) {
         String actualMessage = response.jsonPath().getString(APIConstants.RESPONSE_KEY_MESSAGE);
         boolean messagesMatch = expectedMessage.equals(actualMessage);
 
-        TestLogger.stepInfo("Expected Success message was: " +expectedMessage+ " Actual Success message is: " + actualMessage);
+        TestLogger.assertion("Response message validation - Expected: '{}', Actual: '{}'",
+                expectedMessage, actualMessage);
+
+        if(!messagesMatch) {
+            throw new AssertionError("Expected message was:'" + expectedMessage +
+            "', but actual message is: '" + actualMessage + "'");
+        }
     }
+
+    public static void validateFieldKeyExists(Response response, String fieldKey) {
+        String fieldValue = response.jsonPath().getString(fieldKey);
+        boolean fieldExists = fieldValue != null && !fieldValue.trim().isEmpty();
+
+        String description = "Field '" + fieldKey + "' exists in response";
+        TestLogger.assertion(description, fieldExists);
+
+        if(!fieldExists) {
+            throw new AssertionError ("Field '" + fieldKey + "' not found or empty in response");
+        }
+    }
+
+    public static void validateFieldKeyValue (Response response, String fieldKey, String expectedFieldValue) {
+
+        String actualFieldValue = response.jsonPath().getString(fieldKey);
+        boolean valueMatch = expectedFieldValue.equals(actualFieldValue);
+
+        String description = String.format("Field '%s' value validation", fieldKey);
+        TestLogger.assertion(description, expectedFieldValue, actualFieldValue);
+
+        if(!valueMatch) {
+            throw new AssertionError("Field '" + fieldKey + "' expected to be: '" + expectedFieldValue +
+                    "', but actually is: '" + actualFieldValue + "'");
+        }
+    }
+
+
+
+
+
+
+
 
 
 

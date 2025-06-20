@@ -20,7 +20,11 @@ public class TestContext {
 
 
     public TestContext() {
-        this.scenarioContext = new ScenarioContext();
+        this.scenarioContext = ScenarioContext.getInstance();
+    }
+
+    public ScenarioContext getScenarioContext() {
+        return scenarioContext;
     }
 
     public void initializeAllPages() {
