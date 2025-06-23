@@ -23,7 +23,7 @@ public class CreateAccountAPISteps {
     }
 
 
-    @When ("a user creates an account with automatically generated valid credentials")
+    @When ("user creates an account with auto-generated valid credentials")
     public void a_user_creates_account_with_generated_valid_credentials(){
 
         TestLogger.stepInfo("Creating account with generated credentials");
@@ -47,14 +47,14 @@ public class CreateAccountAPISteps {
         TestLogger.stepInfo("Register success message is " + messageRegisterSuccess);
     }
 
-    @And ("a userId key should be present in the response body")
-    public void a_userId_should_be_present_in_the_response_body() {
+    @And ("id key should be present in the response body")
+    public void id_should_be_present_in_the_response_body() {
 
         String fieldKey = APIConstants.RESPONSE_KEY_USER_ID;
 
         APIUtils.validateFieldKeyExists(response, fieldKey);
 
-        TestLogger.stepInfo("userId key is present in the response body");
+        TestLogger.stepInfo("id key is present in the response body");
 
     }
 }

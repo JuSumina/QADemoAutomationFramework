@@ -13,7 +13,7 @@ import static io.cucumber.junit.platform.engine.Constants.FEATURES_PROPERTY_NAME
 @Suite
 @Cucumber
 @SelectClasspathResource("features")
-@IncludeTags("createaccount")
+@IncludeTags("e2e")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "hooks,stepDefinitions")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty,html:target/cucumber-reports/html-report.html,json:target/cucumber-reports/cucumber.json")
 // @ConfigurationParameter(key = DRY_RUN_PROPERTY_NAME, value = "false")

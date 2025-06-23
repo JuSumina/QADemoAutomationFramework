@@ -50,12 +50,12 @@ public class CreateAccountUISteps {
 
     @When ("user enters valid email and valid password")
     public void user_enters_valid_email_and_valid_password() {
-        String newEmail = TestDataGeneratorUtils.generateEmail();
-        String newPassword = TestDataGeneratorUtils.generatePassword();
+        String email = TestDataGeneratorUtils.generateEmail();
+        String password = TestDataGeneratorUtils.generatePassword();
 
-        testContext.getCreateAccountPage().enterAccountCredentials(newEmail, newPassword);
+        testContext.getCreateAccountPage().enterAccountCredentials(email, password);
 
-        TestLogger.stepInfo("Entered valid email: " + newEmail);
+        TestLogger.stepInfo("Entered valid email: " + email);
     }
 
     @And ("user clicks on Create Account button")
@@ -64,10 +64,6 @@ public class CreateAccountUISteps {
         testContext.getCreateAccountPage().clickonCreateAccountBtn();
 
         TestLogger.stepInfo("Clicked on Create Account button");
-
-        //Thread.sleep(2000);
-
-
 
     }
 
@@ -97,6 +93,7 @@ public class CreateAccountUISteps {
 
     @And ("user should get redirected to Login page")
     public void user_should_get_redirected_to_login_page() {
+        TestLogger.stepInfo("Redirecting to User Dashboard");
 
         WebDriver driver = DriverFactory.getDriver();
         WaitUtils.waitForInvisibility(driver, testContext.getCreateAccountPage().successPopup);

@@ -1,5 +1,6 @@
 package hooks;
 
+import context.ScenarioContext;
 import context.TestContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -8,12 +9,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
-import utils.ConfigReader;
-import utils.DriverFactory;
+import utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import utils.ElementUtils;
-import utils.TestLogger;
 
 public class Hooks {
 
@@ -23,7 +21,10 @@ public class Hooks {
         this.testContext = testContext;
     }
 
-    @Before
+
+
+    // ========== BEFORE HOOKS ========== //
+    @Before ("not e2e")
     public void preCondition(Scenario scenario) {
         // Initialize logger context for this scenario
         TestLogger.initializeContext(scenario.getName(), String.valueOf(Thread.currentThread().threadId()));
@@ -84,7 +85,27 @@ public class Hooks {
         }
     }
 
-    @After
+
+    @Before ("e2e")
+    public void preConditionE2E(Scenario scenario) {
+
+        TestLogger.initializeContext(scenario.getName(), String.valueOf(Thread.currentThread().threadId()));
+        TestLogger.scenarioStart(scenario.getName());
+
+        TestLogger.threadInfo();
+
+        TestLogger.info("Initializing WebDriver for scenario: {}", scenario.getName());
+        WebDriver driver = DriverFactory.getInstance().createDriverFromProperties();
+        testContext.driver = driver;
+
+        cleanUpExistingTestData();
+    }
+
+
+
+    // ========== AFTER HOOKS ========== //
+
+    @After ("not e2e")
     public void tearDown(Scenario scenario) {
         WebDriver driver = testContext.driver;
 
@@ -138,9 +159,66 @@ public class Hooks {
         }
     }
 
-    /**
-     * Helper method to attach screenshot to Cucumber report
-     */
+    @After ("e2e")
+    public void tearDownE2E(Scenario scenario) {
+        WebDriver driver = testContext.driver;
+
+        try {
+            if (scenario.isFailed() && driver != null) {
+                TestLogger.testFailure(scenario.getName(), "End-to-End execution failed");
+
+                // Take screenshot using our utility method
+                String screenshotPath = ElementUtils.takeScreenshot("failed_" + scenario.getName());
+
+                // Attach screenshot to Cucumber report
+                if (screenshotPath != null) {
+                    attachScreenshotToReport(scenario, screenshotPath);
+                    TestLogger.info("Screenshot attached to Cucumber report for failed scenario");
+                } else {
+                    // Fallback to direct screenshot if utility method fails
+                    TestLogger.warn("Utility screenshot failed, trying direct screenshot capture");
+                    try {
+                        byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                        scenario.attach(screenshot, "image/png", "Failed_" + scenario.getName());
+                        TestLogger.info("Direct screenshot attached to Cucumber report");
+                    } catch (Exception e) {
+                        TestLogger.error("Failed to take any screenshot for scenario '{}': {}", scenario.getName(), e.getMessage());
+                    }
+                }
+
+            } else if (!scenario.isFailed()) {
+                TestLogger.info("Scenario '{}' completed successfully", scenario.getName());
+            }
+
+            // Log final scenario status
+            String status = scenario.isFailed() ? "FAILED" : "PASSED";
+            TestLogger.scenarioEnd(scenario.getName(), status);
+
+        } catch (Exception e) {
+            TestLogger.error("Error during teardown for scenario '{}': {}", scenario.getName(), e.getMessage());
+        } finally {
+            // Always quit driver and clean up
+            if (driver != null) {
+                try {
+                    DriverFactory.getInstance().quitDriver();
+                    TestLogger.browserAction("Quit Driver", "WebDriver closed successfully");
+                } catch (Exception e) {
+                    TestLogger.error("Error quitting WebDriver: {}", e.getMessage());
+                }
+            }
+
+            cleanUpTestData(scenario);
+
+            cleanUpWebDriver(scenario);
+
+        }
+    }
+
+
+
+    // ========== HOOK METHODS ========== //
+
+    //Attach screenshot to Cucumber report
     private void attachScreenshotToReport(Scenario scenario, String screenshotPath) {
         try {
             if (screenshotPath != null) {
@@ -153,6 +231,73 @@ public class Hooks {
         }
     }
 
+
+    private void cleanUpExistingTestData(){
+        try{
+            if (!DBUtils.testConnection()) {
+                TestLogger.warn("Database connection test failed; skipping cleanup");
+                return;
+            }
+            TestLogger.info("Pre-test cleanup: Database connection verified");
+        } catch (Exception e) {
+            TestLogger.warn("Pre-test cleanup failed: {}", e.getMessage());
+        }
+    }
+
+
+    private void cleanUpTestData(Scenario scenario){
+        TestLogger.stepInfo("Starting test data cleanup for scenario: {}", scenario.getName());
+        try {
+            ScenarioContext scenarioContext = testContext.getScenarioContext();
+
+            // Try to delete by user ID first (more specific)
+            String userId = scenarioContext.getString(ScenarioContext.USER_ID);
+            if (userId != null && !userId.trim().isEmpty()) {
+                boolean deletedById = DBUtils.deleteUserById(userId);
+                if (deletedById) {
+                    TestLogger.info("Successfully cleaned up user by ID: {}", userId);
+                    return; // If deleted by ID, no need to try by email
+                }
+            }
+
+            // Fallback: delete by email if ID deletion didn't work
+            String email = scenarioContext.getString(ScenarioContext.EMAIL);
+            if (email != null && !email.trim().isEmpty()) {
+                boolean deletedByEmail = DBUtils.deleteUserByEmail(email);
+                if (deletedByEmail) {
+                    TestLogger.info("Successfully cleaned up user by email: {}", email);
+                } else {
+                    TestLogger.warn("No user found to clean up with email: {}", email);
+                }
+            }
+
+        } catch (Exception e) {
+            TestLogger.error("Test data cleanup failed: {}", e.getMessage());
+            // Don't fail the test because of cleanup issues
+        }
+
+        // Always clear scenario context
+        testContext.scenarioContext.clearContext();
+        TestLogger.info("Test data cleanup completed");
+    }
+
+    private void cleanUpWebDriver(Scenario scenario) {
+        if (testContext.driver != null) {
+            try {
+                DriverFactory.getInstance().quitDriver();
+                TestLogger.info("WebDriver closed for scenario: {}", scenario.getName());
+            } catch (Exception e) {
+                TestLogger.warn("Error closing WebDriver: {}", e.getMessage());
+            }
+        }
+
+        TestLogger.scenarioEnd(scenario.getName(), scenario.getStatus().toString());
+        TestLogger.clearContext();
+    }
+
+
+
+    // ========== HOOK GLOBAL SETUP ========== //
 
     @Before(order = 0)
     public void globalSetup() {

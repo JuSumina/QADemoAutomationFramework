@@ -14,7 +14,7 @@ public class ConfigReader {
     // Static block to load properties when the class is first loaded
     static {
         try {
-            String filePath = "src/test/resources/config/config.properties"; // Adjust path if needed
+            String filePath = "src/test/resources/config/config.properties";
             FileInputStream fis = new FileInputStream(filePath);
             properties = new Properties();
             properties.load(fis);
@@ -45,7 +45,7 @@ public class ConfigReader {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
             logger.error("Property '{}' value '{}' is not a valid integer. Returning 0.", key, value);
-            return 0; // Or throw a more specific exception
+            return 0;
         }
     }
 }

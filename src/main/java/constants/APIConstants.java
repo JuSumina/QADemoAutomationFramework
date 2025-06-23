@@ -10,14 +10,17 @@ public class APIConstants {
 
 
     public static final String REGISTER_USER = "/register";
+    public static final String USER_DETAILS = "/users";
     public static final String LOGIN_USER = "/login";
 
 
     public static final String RESPONSE_KEY_MESSAGE = "message";
-    public static final String RESPONSE_KEY_USER_ID = "userId";
+    public static final String RESPONSE_KEY_USER_ID = "id";
+    public static final String RESPONSE_KEY_USER_EMAIL = "email";
+    public static final String RESPONSE_KEY_DATA = "data";
 
 
-    public static final String MESSAGE_REGISTER_SUCCESS = "User registered!";
+    public static final String MESSAGE_REGISTER_SUCCESS = "User registered successfully";
 
 
 }

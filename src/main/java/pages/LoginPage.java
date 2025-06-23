@@ -24,16 +24,16 @@ public class LoginPage {
 
     @FindBy(xpath="//form[@id='user-form']/preceding-sibling::h2")
     public WebElement userLoginHeader;
-    @FindBy(id="user-email")
+    @FindBy(id="userEmail")
     public WebElement userUsernameField;
 
-    @FindBy(id="user-password")
+    @FindBy(id="userPassword")
     public WebElement userPasswordField;
 
-    @FindBy(id="user-login")
+    @FindBy(id="userLogin")
     public WebElement userLoginBtn;
 
-    @FindBy(id="user-login-message")
+    @FindBy(id="userLoginMessage")
     public WebElement userLoginErrorMessage;
 
     @FindBy(xpath="//a[text()='Create Account']")
@@ -41,6 +41,12 @@ public class LoginPage {
 
     @FindBy(xpath="//a[text()='Forgot your password?']")
     public WebElement forgotPasswordLink;
+
+    @FindBy(id="userToggle")
+    public WebElement userLoginToggle;
+
+    @FindBy(id="adminToggle")
+    public WebElement adminLoginToggle;
 
 
     // ========== LOGIN METHODS ========== //
@@ -51,14 +57,24 @@ public class LoginPage {
     }
 
 
-    public void enterUsername(String username) {
-        TestLogger.actionInfo("Enter Username", username);
-        ElementUtils.clearAndType(userUsernameField, username);
+    public void enterEmail(String email) {
+        TestLogger.actionInfo("Enter Username", email);
+        ElementUtils.clearAndType(userUsernameField, email);
     }
 
     public void enterPassword(String password) {
         TestLogger.actionInfo("Enter Password", password);
         ElementUtils.clearAndType(userPasswordField, password);
+    }
+
+    public void clickOnUserToggle() {
+        TestLogger.actionInfo("Click", "User Login toggle");
+        ElementUtils.click(userLoginToggle);
+    }
+
+    public void clickOnAdminToggle() {
+        TestLogger.actionInfo("Click", "Admin Login toggle");
+        ElementUtils.click(adminLoginToggle);
     }
 
     public void clickOnLoginBtn() {

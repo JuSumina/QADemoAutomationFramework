@@ -36,13 +36,13 @@ public class LoginSteps{
         String userHeaderText = testContext.getLoginPage().getUserLoginHeaderText();
         assertEquals("User Login", userHeaderText);
 
-        String username = ConfigReader.getProperty("username");
+        String email = ConfigReader.getProperty("email");
         String password = ConfigReader.getProperty("password");
 
-        testContext.getLoginPage().enterUsername(username);
+        testContext.getLoginPage().enterEmail(email);
         testContext.getLoginPage().enterPassword(password);
 
-        TestLogger.stepInfo("Valid credentials entered for user: " + username);
+        TestLogger.stepInfo("Valid credentials entered for user: " + email);
     }
 
     @And("clicks on login button")
@@ -83,13 +83,13 @@ public class LoginSteps{
         String userHeaderText = testContext.getLoginPage().getUserLoginHeaderText();
         assertEquals("User Login", userHeaderText);
 
-        String invalidUsername = ConfigReader.getProperty("invalid.username");
+        String invalidEmail = ConfigReader.getProperty("invalid.email");
         String invalidPassword = ConfigReader.getProperty("invalid.password");
 
-        testContext.getLoginPage().enterUsername(invalidUsername);
+        testContext.getLoginPage().enterEmail(invalidEmail);
         testContext.getLoginPage().enterPassword(invalidPassword);
 
-        TestLogger.stepInfo("Invalid credentials entered for user: " + invalidUsername);
+        TestLogger.stepInfo("Invalid credentials entered for user: " + invalidEmail);
     }
 
     @Then("user sees an error message")

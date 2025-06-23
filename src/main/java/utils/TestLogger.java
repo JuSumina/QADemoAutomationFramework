@@ -40,6 +40,10 @@ public class TestLogger {
         logger.info("STEP: {}", stepDescription);
     }
 
+    public static void stepInfo(String stepDescription, String element) {
+        logger.info("STEP: {}", stepDescription, element);
+    }
+
     public static void actionInfo(String action, String element) {
         logger.info("ACTION: {} on element: {}", action, element);
     }
